@@ -4,12 +4,10 @@ A social media web application built for sharing images. It was built using reac
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 Change into client directory
 
-### `Cd Client`
+#### `Cd Client`
 
 Start the server
 
-### `npm start`
+#### `npm start`
