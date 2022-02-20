@@ -7,8 +7,8 @@ const Footer = () => {
         <p className="copyright_nomargin md:mx-auto">&copy; <a href="https://github.com/TannerGs">Tanner Simpkins 2022</a></p>
       </div>
       <div className='md:flex' >
-          <p className='md:mr-4 text-center'><a href='https://github.com/TannerGS' target='_blank' rel='noreferrer'>Github: https://github.com/TannerGS</a></p>
-          <p className='md:text-center' >Email: tannersimpkins@gmail.com</p>
+          <p className='md:mr-4 text-center md:flex hidden'><a href='https://github.com/TannerGS' target='_blank' rel='noreferrer'>Github: https://github.com/TannerGS</a></p>
+          <p className='md:text-center md:flex hidden' >Email: tannersimpkins@gmail.com</p>
       </div>
     </footer>
   )
