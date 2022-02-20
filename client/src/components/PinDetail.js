@@ -16,6 +16,28 @@ const PinDetail = ({ user }) => {
   const [addingComment, setAddingComment] = useState(false);
   const { pinId } = useParams();
 
+  useEffect(() => {
+    fetchPinDetails();
+  }, [pinId]);
+
+  const fetchPinDetails = () => {
+    let query = pinDetailQuery(pinId);
+
+    if(query) {
+      client.fetch(query)
+        .then((data) => {
+          setPinDetail(data[0]);
+
+          if(data[0]) {
+            query = pinDetailMorePinQuery(data[0]);
+
+            client.fetch(query)
+              .then((res) => setPins(res));
+          }
+        })
+    }
+  }
+
   const addComment = () => {
     if(comment) {
       setAddingComment(true);
@@ -36,28 +58,6 @@ const PinDetail = ({ user }) => {
     }
   }
 
-  const fetchPinDetails = () => {
-    let query = pinDetailQuery(pinId);
-
-    if(query) {
-      client.fetch(query)
-        .then((data) => {
-          setPinDetail(data[0]);
-
-          if(data[0]) {
-            query = pinDetailMorePinQuery(data[0]);
-
-            client.fetch(query)
-              .then((res) => setPins(res));
-          }
-        })
-    }
-  }
-
-  useEffect(() => {
-    fetchPinDetails();
-  }, [pinId])
-
   if(!pinDetail) return <Spinner message='Loading pin...' />
 
   return (
@@ -73,7 +73,7 @@ const PinDetail = ({ user }) => {
       </div>
       <div className='w-full p-5 flex-1 xl:min-w-620px' >
         {pinDetail.destination && (
-          <div className='flex items-center justify-between pt-2' style={{ borderRadius: '32px', borderWidth: '1px', marginTop: '4px' }} >
+          <div className='flex items-center justify-between pt-2 pb-2' style={{ borderRadius: '32px', borderWidth: '1px', marginTop: '4px' }} >
           <div className='flex gap-2 items-center' >
           <a
                   href={`${pinDetail?.image?.asset.url}?dl=`}

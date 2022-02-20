@@ -5,6 +5,7 @@ import { client } from '../client';
 import { feedQuery, searchQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
+import notFound from '../assets/nothing.jpg';
 
 const Feed = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,18 @@ const Feed = () => {
 
   if(loading) return <Spinner message='We are adding new ideas to your feed!' />
 
-  if(!pins?.length) return <h2>No Pins Available</h2>
+  if(!pins?.length) {
+    return (
+      <div>
+        <div className='mt-10 mb-10 text-center text-xl' >
+          No Pins Found!
+        </div>
+        <div>
+          <img src={notFound} alt='not-found' className='mx-auto' style={{ width: '30rem', height: '30rem' }} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div>
