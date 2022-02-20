@@ -22,7 +22,7 @@ const CreatePin = ({ user }) => {
   const uploadImage = (e) => {
     const { type, name } = e.target.files[0];
 
-    if(type === 'image/png' || type === 'image/svg' || type === 'image/jpg' || type === 'image/gif' || type === 'image/tiff') {
+    if(type === 'image/png' || type === 'image/svg' || type === 'image/jpeg' || type === 'image/gif' || type === 'image/tiff') {
       setWrongImageType(false);
       setLoading(true);
 
@@ -41,7 +41,7 @@ const CreatePin = ({ user }) => {
   }
 
   const savePin = () => {
-    if(title && about && destination && imageAsset?._id && category) {
+    if(title && about && imageAsset?._id && category) {
       const doc = {
         _type: 'pin',
         title,
