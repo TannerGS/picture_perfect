@@ -67,6 +67,7 @@ const PinDetail = ({ user }) => {
         <img 
           src={pinDetail?.image && urlFor(pinDetail.image).url()}
           className='rounded-t-3xl rounded-b-lg'
+          style={{ maxHeight: '55rem' }} // RIGHT HERE!!!!!!!
           alt='user-post'
         />
       </div>
@@ -142,7 +143,7 @@ const PinDetail = ({ user }) => {
         <MasonryLayout pins={pins} />
       </>
     ) : (
-      <Spinner message='Loading more pins...' />
+      <br />
     )}
     </>
   )
