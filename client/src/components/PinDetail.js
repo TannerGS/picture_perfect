@@ -67,38 +67,48 @@ const PinDetail = ({ user }) => {
         <img 
           src={pinDetail?.image && urlFor(pinDetail.image).url()}
           className='rounded-t-3xl rounded-b-lg'
-          style={{ maxHeight: '55rem' }} // RIGHT HERE!!!!!!!
+          style={{ maxHeight: '55rem' }}
           alt='user-post'
         />
       </div>
       <div className='w-full p-5 flex-1 xl:min-w-620px' >
-        <div className='flex items-center justify-between' >
+        {pinDetail.destination && (
+          <div className='flex items-center justify-between pt-2' style={{ borderRadius: '32px', borderWidth: '1px', marginTop: '4px' }} >
           <div className='flex gap-2 items-center' >
           <a
                   href={`${pinDetail?.image?.asset.url}?dl=`}
                   download
                   onClick={(e) => e.stopPropagation()}
-                  className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none'
+                  className='bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none pl-4 pt-1'
                 >
                   <MdDownloadForOffline />
                 </a>
           </div>
-          <a href={pinDetail.destination} target='_blank' rel='noreferrer' >
+          <a href={pinDetail.destination} target='_blank' rel='noreferrer' className='pr-4' >
             {pinDetail.destination}
           </a>
         </div>
+        )}
         <div>
-          <h1 className='text-4xl font-bold break-words mt-3' >{pinDetail.title}</h1>
-          <p className='mt-3' >{pinDetail.about}</p>
+          <h1 className='text-4xl font-bold break-words mt-3 text-center' >{pinDetail.title}</h1>
         </div>
-        <Link to={`user-profile/${pinDetail.postedBy?._id}`} className='flex gap-2 mt-2 items-center' >
-        <img
-          className='w-8 h-8 rounded-full object-cover'
-          src={pinDetail.postedBy?.image}
-          alt='user-profile' 
-        />
-        <p className='font-semibold capitalize' >{pinDetail.postedBy?.userName}</p>
-      </Link>
+          <div className='mt-2' style={{ borderWidth: '1px' }} > 
+          <p className='mt-3 text-center mb-4' >{pinDetail.about}</p>
+          <hr  
+            style={{ 
+              border: '0',
+              height: '1px',
+              backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))' 
+            }}/> 
+            <Link to={`user-profile/${pinDetail.postedBy?._id}`} className='flex gap-2 mt-4 items-center ml-4 mb-4' >
+            <img
+              className='w-8 h-8 rounded-full object-cover'
+              src={pinDetail.postedBy?.image}
+              alt='user-profile' 
+            />
+            <p className='font-semibold capitalize' >{pinDetail.postedBy?.userName}</p>
+            </Link>
+          </div>
       <h2 className='mt-5 text-2xl' >Comments</h2>
       <div className='max-h-370 overflow-y-auto' >
         {pinDetail?.comments?.map((comment, i) => (
